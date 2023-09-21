@@ -6,4 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface UserRepository extends MongoRepository<UserDomain, String> {
     UserDomain findUserDomainById(String userId);
     boolean existsUserDomainByEmail(String email);
+    UserDomain findUserDomainByEmail(String email);
 }
