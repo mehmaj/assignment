@@ -33,10 +33,5 @@ public class UserController {
     public ResponseEntity<?> signIn(@Valid @RequestBody SignInDTO dto) {
         return ResponseEntity.ok().body(userService.signIn(dto));
     }
-    @GetMapping("/tst")
-    public ResponseEntity<?> tst() {
-        return ResponseEntity.ok().body("authorized");
-    }
-
 
 }

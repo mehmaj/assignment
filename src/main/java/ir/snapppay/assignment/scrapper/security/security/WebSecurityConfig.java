@@ -65,10 +65,10 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .anyRequest().hasRole("USER")
                 )
-                .httpBasic(withDefaults());
-        http.authenticationProvider(authenticationProvider());
-
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                .httpBasic(withDefaults())
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+                .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
     }
