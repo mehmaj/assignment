@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Document("users")
@@ -20,10 +19,6 @@ import java.util.Set;
 public class UserDomain {
     @Id
     private String id;
-
-    @NotBlank
-    @Size(max = 20)
-    private String username;
 
     @Size(max = 50)
     @Email

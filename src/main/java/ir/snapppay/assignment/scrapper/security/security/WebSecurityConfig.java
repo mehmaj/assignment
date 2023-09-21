@@ -12,6 +12,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -55,6 +56,7 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    //ensure that user with USER role can access to endpoint starts with /api/v1/**
     @Bean
     @Order(1)
     public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
@@ -67,12 +69,14 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+    //permit user access to all others endpoints
+    //disable csrf
     @Bean
     public SecurityFilterChain formLoginFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .anyRequest().permitAll()
-                );
+                ).csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 }
