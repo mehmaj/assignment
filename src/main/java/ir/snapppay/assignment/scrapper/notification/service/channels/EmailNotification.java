@@ -1,6 +1,7 @@
-package ir.snapppay.assignment.scrapper.notification.service;
+package ir.snapppay.assignment.scrapper.notification.service.channels;
 
 import ir.snapppay.assignment.scrapper.notification.model.NotificationDomain;
+import ir.snapppay.assignment.scrapper.notification.service.NotificationService;
 import ir.snapppay.assignment.scrapper.user.model.UserDomain;
 import ir.snapppay.assignment.scrapper.user.service.UserService;
 import org.springframework.stereotype.Component;

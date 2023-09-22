@@ -1,4 +1,4 @@
-package ir.snapppay.assignment.scrapper.notification.service;
+package ir.snapppay.assignment.scrapper.notification.service.channels;
 
 import ir.snapppay.assignment.scrapper.notification.model.NotificationDomain;
 

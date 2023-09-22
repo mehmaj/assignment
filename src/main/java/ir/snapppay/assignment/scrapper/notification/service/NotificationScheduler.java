@@ -1,5 +1,6 @@
 package ir.snapppay.assignment.scrapper.notification.service;
 
+import ir.snapppay.assignment.scrapper.notification.service.channels.EmailNotification;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,7 @@ public class NotificationScheduler {
     //every 1 m scheduler checks if there is any eligible notification record, so call sendMessage
     @Scheduled(fixedRate = 60000)
     public void scheduleTrackProcess() {
-        System.out.println("scheduler running...");
+        System.out.println("Notification Scheduler running...");
         notificationService.fetchEligibleNotifications().forEach(emailNotification::sendMessage);
     }
 }
