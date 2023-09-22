@@ -1,5 +1,6 @@
 package ir.snapppay.assignment.scrapper.user.model.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -11,9 +12,11 @@ public class SignupDTO {
     @Email(message = "Invalid email address")
     @NotBlank(message = "Email is required!")
     @Size(max = 50,message = "Maximum length of email can be 50 characters!")
+    @Schema( example ="sample@gmail.com")
     private String email;
     @NotBlank(message = "Password is required!")
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",message = "Ensure the entered password is at least 8 characters long, contains a letter, and a number")
     @Size(max = 120,message = "Maximum length of password can be 120 characters!")
+    @Schema( example ="1234567a")
     private String password;
 }

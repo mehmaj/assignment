@@ -24,7 +24,8 @@ public class TrackService {
     final private TrackRepository trackRepository;
     @Value("${config.crawl.interval.ms}")
     int CRAWL_INTERVAL_MS;
-
+    @Value("${config.max.concurrency}")
+    int MAX_CONCURRENCY;
     public TrackService(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }
@@ -48,7 +49,7 @@ public class TrackService {
                     TrackDomain.builder()
                             .url(dto.getUrl())
                             .userIds(List.of(principal.getId()))
-                            .productId(dto.getUrl().substring(dto.getUrl().indexOf("/dkp-") + 5, dto.getUrl().indexOf("/", dto.getUrl().indexOf("/dkp-") + 1)))
+                            .productId(extractProductId(dto.getUrl()))
                             .nextCrawlDate(new Date())
                             .build()
             );
@@ -58,9 +59,13 @@ public class TrackService {
         return new ResponseDTO("URL saved successfully!");
     }
 
+    private String extractProductId(String url) {
+        return url.substring(url.indexOf("/dkp-") + 5, url.indexOf("/", url.indexOf("/dkp-") + 1));
+    }
+
     public List<TrackDomain> fetchEligibleTracks() {
         Page<TrackDomain> eligibleTracks = trackRepository.findAllByNextCrawlDateBefore(new Date(), PageRequest
-                .of(0, 100));
+                .of(0, MAX_CONCURRENCY));
         return eligibleTracks.getContent();
     }
 
@@ -70,7 +75,7 @@ public class TrackService {
         System.out.println(track.toString());
         //Generate nextCrawlDate based on config interval
         Calendar next = Calendar.getInstance();
-        next.setTimeInMillis(new Date().getTime() + CRAWL_INTERVAL_MS);
+        next.setTimeInMillis(track.getNextCrawlDate().getTime() + CRAWL_INTERVAL_MS);
         //Check if this is first crawl, so set the currentPrice as the lastPrice
         if (track.getCurrentPrice() == null || track.getLastPrice() == null) {
             trackRepository.updateTrackByProcessResponse(track.getId(),
