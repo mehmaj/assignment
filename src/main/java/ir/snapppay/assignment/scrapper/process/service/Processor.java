@@ -1,7 +1,8 @@
-package ir.snapppay.assignment.scrapper.process;
+package ir.snapppay.assignment.scrapper.process.service;
 
 import ir.snapppay.assignment.scrapper.process.model.DKDataModel;
 import ir.snapppay.assignment.scrapper.track.model.TrackDomain;
+import ir.snapppay.assignment.scrapper.track.service.TrackService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -11,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class Processor {
-
+    final private TrackService trackService;
     private RestTemplate restTemplate;
     HttpEntity<Object> request;
 
@@ -19,6 +20,10 @@ public class Processor {
     private String DGKP_URL;
     @Value("${config.user.agent}")
     private String USER_AGENT;
+
+    public Processor(TrackService trackService) {
+        this.trackService = trackService;
+    }
 
 
     @PostConstruct
@@ -33,8 +38,11 @@ public class Processor {
 
     @Async("processExecutor")
     public DKDataModel process(TrackDomain track) {
+        //Set url based on productId
         String url = String.format(DGKP_URL, track.getProductId());
+        //Crawl and parse URL
         ResponseEntity<DKDataModel> result = restTemplate.exchange(url, HttpMethod.GET, request, DKDataModel.class);
+        trackService.updateTrack(track,result.getBody());
         return result.getBody();
     }
 
