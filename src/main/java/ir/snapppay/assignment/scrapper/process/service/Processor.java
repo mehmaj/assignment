@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
+
 @Component
 public class Processor {
     final private TrackService trackService;
@@ -37,13 +39,15 @@ public class Processor {
     }
 
     @Async("processExecutor")
-    public DKDataModel process(TrackDomain track) {
+    public void process(TrackDomain track) {
+        System.out.println("Process started:"+Thread.currentThread().getName());
+        System.out.println(new Date());
         //Set url based on productId
         String url = String.format(DGKP_URL, track.getProductId());
         //Crawl and parse URL
         ResponseEntity<DKDataModel> result = restTemplate.exchange(url, HttpMethod.GET, request, DKDataModel.class);
-        trackService.updateTrack(track,result.getBody());
-        return result.getBody();
+        //Update track based on crawled and parsed data
+        trackService.updateTrack(track, result.getBody());
     }
 
 }

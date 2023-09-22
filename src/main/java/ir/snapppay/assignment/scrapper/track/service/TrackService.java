@@ -66,6 +66,8 @@ public class TrackService {
 
     @Transactional
     public void updateTrack(TrackDomain track, DKDataModel body) {
+        System.out.println("Before:");
+        System.out.println(track.toString());
         //Generate nextCrawlDate based on config interval
         Calendar next = Calendar.getInstance();
         next.setTimeInMillis(new Date().getTime() + CRAWL_INTERVAL_MS);
@@ -87,5 +89,7 @@ public class TrackService {
         } else {
             trackRepository.updateTrackByNextCrawlDate(track.getId(), next.getTime());
         }
+        System.out.println("After:");
+        System.out.println(trackRepository.findTrackDomainByUrl(track.getUrl()));
     }
 }

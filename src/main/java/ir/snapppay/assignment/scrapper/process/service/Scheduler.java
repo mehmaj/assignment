@@ -17,6 +17,7 @@ public class Scheduler {
     //every 30s scheduler checks if there is any eligible track record, so call processor thread
     @Scheduled(fixedRate = 30000)
     public void scheduleTrackProcess() {
+        System.out.println("scheduler running...");
         trackService.fetchEligibleTracks().forEach(processor::process);
     }
 }
