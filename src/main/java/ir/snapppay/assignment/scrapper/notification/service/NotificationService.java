@@ -34,9 +34,9 @@ public class NotificationService {
 
     private String generateMessage(TrackDomain track) {
         if (track.getCurrentPrice() > track.getLastPrice())
-            return String.format(INCREASED_TEMPLATE, track.getUrl(), ((track.getCurrentPrice() - track.getLastPrice()) / (float) track.getLastPrice()));
+            return String.format(INCREASED_TEMPLATE, track.getUrl(), ((track.getCurrentPrice() - track.getLastPrice()) / (float) track.getLastPrice() * 100));
         else
-            return String.format(DECREASED_TEMPLATE, track.getUrl(), ((track.getLastPrice() - track.getCurrentPrice()) / (float) track.getLastPrice()));
+            return String.format(DECREASED_TEMPLATE, track.getUrl(), ((track.getLastPrice() - track.getCurrentPrice()) / (float) track.getLastPrice() * 100));
     }
 
     public List<NotificationDomain> fetchEligibleNotifications() {

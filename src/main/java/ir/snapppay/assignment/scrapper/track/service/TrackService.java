@@ -93,11 +93,12 @@ public class TrackService {
                     track.getCurrentPrice(),
                     next.getTime()
             );
+            notificationService.addNotification(trackRepository.findTrackDomainByUrl(track.getUrl()));
             //If there is no changes in price, just update nextCrawlDate
         } else {
             trackRepository.updateTrackByNextCrawlDate(track.getId(), next.getTime());
         }
-        notificationService.addNotification(trackRepository.findTrackDomainByUrl(track.getUrl()));
+
         System.out.println("After:");
         System.out.println(trackRepository.findTrackDomainByUrl(track.getUrl()));
     }
