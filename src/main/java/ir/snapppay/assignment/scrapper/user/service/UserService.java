@@ -75,4 +75,8 @@ public class UserService {
                 .token(jwt)
                 .build();
     }
+
+    public UserDomain findById(String id) {
+        return userRepository.findUserDomainById(id);
+    }
 }

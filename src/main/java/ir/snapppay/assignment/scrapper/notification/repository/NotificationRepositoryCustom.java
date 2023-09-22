@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Date;
 
-public interface NotificationRepository extends MongoRepository<NotificationDomain, String>,NotificationRepositoryCustom {
-    Page<NotificationDomain> findAllByCreatedDateBeforeAndSentIsFalse(Date now, PageRequest pageRequest);
+public interface NotificationRepositoryCustom {
+    void updateNotificationAsSent(String notificationId);
 }
