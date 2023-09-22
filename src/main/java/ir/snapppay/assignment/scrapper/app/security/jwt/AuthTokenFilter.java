@@ -1,6 +1,6 @@
-package ir.snapppay.assignment.scrapper.security.security.jwt;
+package ir.snapppay.assignment.scrapper.app.security.jwt;
 
-import ir.snapppay.assignment.scrapper.security.security.services.UserDetailsServiceImpl;
+import ir.snapppay.assignment.scrapper.app.security.services.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -22,6 +22,8 @@ public class TrackDomain {
     @Size(max = 500)
     private String url;
 
+    private String productId;
+
     @NotBlank
     private List<String> userIds;
 

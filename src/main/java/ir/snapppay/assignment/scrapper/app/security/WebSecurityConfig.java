@@ -1,12 +1,11 @@
-package ir.snapppay.assignment.scrapper.security.security;
+package ir.snapppay.assignment.scrapper.app.security;
 
 
-import ir.snapppay.assignment.scrapper.security.security.jwt.AuthTokenFilter;
-import ir.snapppay.assignment.scrapper.security.security.services.UserDetailsServiceImpl;
+import ir.snapppay.assignment.scrapper.app.security.jwt.AuthTokenFilter;
+import ir.snapppay.assignment.scrapper.app.security.services.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;

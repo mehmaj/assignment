@@ -1,4 +1,4 @@
-package ir.snapppay.assignment.scrapper.security.security.jwt;
+package ir.snapppay.assignment.scrapper.app.security.jwt;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

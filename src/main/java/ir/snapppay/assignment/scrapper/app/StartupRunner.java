@@ -1,4 +1,4 @@
-package ir.snapppay.assignment.scrapper.security.security;
+package ir.snapppay.assignment.scrapper.app;
 
 import ir.snapppay.assignment.scrapper.user.model.ERole;
 import ir.snapppay.assignment.scrapper.user.model.Role;

@@ -1,6 +1,6 @@
 package ir.snapppay.assignment.scrapper.user.service;
 
-import ir.snapppay.assignment.scrapper.security.security.jwt.JwtUtils;
+import ir.snapppay.assignment.scrapper.app.security.jwt.JwtUtils;
 import ir.snapppay.assignment.scrapper.user.model.ERole;
 import ir.snapppay.assignment.scrapper.user.model.Role;
 import ir.snapppay.assignment.scrapper.user.model.UserDomain;

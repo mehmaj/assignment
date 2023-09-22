@@ -1,4 +1,4 @@
-package ir.snapppay.assignment.scrapper.security.security.services;
+package ir.snapppay.assignment.scrapper.app.security.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ir.snapppay.assignment.scrapper.user.model.UserDomain;

@@ -1,8 +1,8 @@
-package ir.snapppay.assignment.scrapper.security.security.jwt;
+package ir.snapppay.assignment.scrapper.app.security.jwt;
 
 
 import io.jsonwebtoken.*;
-import ir.snapppay.assignment.scrapper.security.security.services.UserDetailsImpl;
+import ir.snapppay.assignment.scrapper.app.security.services.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
