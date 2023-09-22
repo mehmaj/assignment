@@ -30,6 +30,9 @@ public class TrackDomain {
     @CreatedDate
     private Date createdDate;
 
-    @LastModifiedDate
-    private Date modifiedDate;
+    private Date nextCrawlDate;
+
+    private Long lastPrice;
+
+    private Long currentPrice;
 }
