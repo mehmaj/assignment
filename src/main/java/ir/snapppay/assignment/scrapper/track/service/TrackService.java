@@ -2,6 +2,7 @@ package ir.snapppay.assignment.scrapper.track.service;
 
 
 import ir.snapppay.assignment.scrapper.app.security.services.UserDetailsImpl;
+import ir.snapppay.assignment.scrapper.notification.service.NotificationService;
 import ir.snapppay.assignment.scrapper.process.model.DKDataModel;
 import ir.snapppay.assignment.scrapper.track.model.AddUrlDTO;
 import ir.snapppay.assignment.scrapper.track.model.TrackDomain;
@@ -22,12 +23,14 @@ import java.util.List;
 @Service
 public class TrackService {
     final private TrackRepository trackRepository;
+    final private NotificationService notificationService;
     @Value("${config.crawl.interval.ms}")
     int CRAWL_INTERVAL_MS;
     @Value("${config.max.concurrency}")
     int MAX_CONCURRENCY;
-    public TrackService(TrackRepository trackRepository) {
+    public TrackService(TrackRepository trackRepository, NotificationService notificationService) {
         this.trackRepository = trackRepository;
+        this.notificationService = notificationService;
     }
 
     public ResponseDTO addURL(AddUrlDTO dto) {
@@ -94,6 +97,7 @@ public class TrackService {
         } else {
             trackRepository.updateTrackByNextCrawlDate(track.getId(), next.getTime());
         }
+        notificationService.addNotification(trackRepository.findTrackDomainByUrl(track.getUrl()));
         System.out.println("After:");
         System.out.println(trackRepository.findTrackDomainByUrl(track.getUrl()));
     }

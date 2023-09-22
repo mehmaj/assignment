@@ -14,6 +14,7 @@ import java.util.concurrent.Executor;
 @Configuration
 @EnableMongoAuditing
 @PropertySource(value = "classpath:config.properties")
+@PropertySource(value = "classpath:messages_en.properties")
 @EnableAsync
 @EnableScheduling
 public class Config {
