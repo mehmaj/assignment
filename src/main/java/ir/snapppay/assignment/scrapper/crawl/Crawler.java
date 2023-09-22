@@ -1,5 +1,6 @@
 package ir.snapppay.assignment.scrapper.crawl;
 
+import ir.snapppay.assignment.scrapper.crawl.model.DKDataModel;
 import ir.snapppay.assignment.scrapper.track.model.TrackDomain;
 import ir.snapppay.assignment.scrapper.track.repository.TrackRepository;
 import jakarta.annotation.PostConstruct;
@@ -34,11 +35,10 @@ public class Crawler implements CommandLineRunner {
         request = new HttpEntity<>(headers);
     }
 
-    public String crawl(TrackDomain track) {
+    public DKDataModel crawl(TrackDomain track) {
         String url = String.format(DGKP_URL, track.getProductId());
-        ResponseEntity<Object> result = restTemplate.exchange(url, HttpMethod.GET, request, Object.class);
-
-        return null;
+        ResponseEntity<DKDataModel> result = restTemplate.exchange(url, HttpMethod.GET, request, DKDataModel.class);
+        return result.getBody();
     }
 
     @Override
