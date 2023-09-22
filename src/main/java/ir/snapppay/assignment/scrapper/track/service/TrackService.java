@@ -35,7 +35,7 @@ public class TrackService {
                         TrackDomain.builder()
                                 .url(dto.getUrl())
                                 .userIds(List.of(principal.getId()))
-                                .productId(dto.getUrl().substring(dto.getUrl().indexOf("/dkp-"), dto.getUrl().indexOf("/")))
+                                .productId(dto.getUrl().substring(dto.getUrl().indexOf("/dkp-")+5, dto.getUrl().indexOf("/",dto.getUrl().indexOf("/dkp-")+1)))
                                 .build()
                 );
             } else
