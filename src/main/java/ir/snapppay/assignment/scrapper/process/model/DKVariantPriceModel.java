@@ -1,4 +1,4 @@
-package ir.snapppay.assignment.scrapper.crawl.model;
+package ir.snapppay.assignment.scrapper.process.model;
 
 import lombok.Data;
 
