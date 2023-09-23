@@ -1,6 +1,8 @@
 package ir.snapppay.assignment.scrapper.user.service;
 
 import ir.snapppay.assignment.scrapper.app.security.jwt.JwtUtils;
+import ir.snapppay.assignment.scrapper.exception.InvalidInputException;
+import ir.snapppay.assignment.scrapper.exception.UnauthorizedException;
 import ir.snapppay.assignment.scrapper.user.model.ERole;
 import ir.snapppay.assignment.scrapper.user.model.Role;
 import ir.snapppay.assignment.scrapper.user.model.UserDomain;
@@ -36,12 +38,11 @@ public class UserService {
         this.jwtUtils = jwtUtils;
     }
 
-    public ResponseDTO signUp(SignupDTO dto) {
+    public ResponseDTO signUp(SignupDTO dto) throws InvalidInputException {
         //Check if user already exists?
-        if (userRepository.existsUserDomainByEmail(dto.getEmail())) {
-            //TODO error handling
-            return null;
-        }
+        if (userRepository.existsUserDomainByEmail(dto.getEmail()))
+            throw  new InvalidInputException("User already exist!");
+
         // Create new user's account
         UserDomain user =
                 UserDomain.builder()
@@ -58,15 +59,14 @@ public class UserService {
         return new ResponseDTO("User registered successfully!");
     }
 
-    public SignInResponseDTO signIn(SignInDTO dto) {
+    public SignInResponseDTO signIn(SignInDTO dto) throws UnauthorizedException {
         UserDomain user = userRepository.findUserDomainByEmail(dto.getEmail());
         Authentication authentication;
         try {
             authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getId(), dto.getPassword()));
         } catch (Exception exception) {
-            //TODO handle error
-            return null;
+            throw  new UnauthorizedException("Email or password is not valid!");
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
