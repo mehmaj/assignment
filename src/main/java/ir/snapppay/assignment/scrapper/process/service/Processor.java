@@ -42,12 +42,16 @@ public class Processor {
     public void process(TrackDomain track) {
         System.out.println("Process started:"+Thread.currentThread().getName());
         System.out.println(new Date());
+        ResponseEntity<DKDataModel> result = crawl(track);
+        //Update track based on crawled and parsed data
+        trackService.updateTrack(track, result.getBody());
+    }
+
+    public ResponseEntity<DKDataModel> crawl(TrackDomain track) {
         //Set url based on productId
         String url = String.format(DGKP_URL, track.getProductId());
         //Crawl and parse URL
-        ResponseEntity<DKDataModel> result = restTemplate.exchange(url, HttpMethod.GET, request, DKDataModel.class);
-        //Update track based on crawled and parsed data
-        trackService.updateTrack(track, result.getBody());
+        return restTemplate.exchange(url, HttpMethod.GET, request, DKDataModel.class);
     }
 
 }
