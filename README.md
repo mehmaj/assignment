@@ -92,6 +92,7 @@ The `application.properties` file contains the following properties related to t
 2. Configure the `config.properties` and `application.properties` files with your specific settings.
 3. Build the application using Maven.
 4. Run the application.
+5. Check [Swagger documentation](http://localhost:8080/swagger-ui.html) for REST API details.
 
 ## Contributors
 
